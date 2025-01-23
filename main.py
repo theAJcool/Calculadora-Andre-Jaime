@@ -1,8 +1,6 @@
 import os
 import time
 import operator
-#isto é um teste a ver se altera lá
-#Comentário teste
 
 def calculadora(num1: float, num2: float, operador: str) -> float:
     result = float("nan")
@@ -49,7 +47,7 @@ def calculadora_v3(num1: float, num2: float, operador: str) -> float:
     return float("nan")
 
 
-# esta versão quando tentamos o expoente de 0, ele retornava um erro, foi retificado
+
 def calculadora_v4(num1: float, num2: float, operador: str) -> float:
     if num2 == 0 and operador in ['/', '%']:
         return float("nan")
@@ -76,7 +74,7 @@ if __name__ == "__main__":
             numero1: float = float(input('Introduza o primeiro número: '))
             numero2: float = float(input('Introduza o segundo número: '))
             operacao: str = input('Introduza a operação a realizar (+ - / * %) ou (^): ')
-            print(f'O resultado: {calculadora(numero1, numero2, operacao)}')  # Usa versão 1 por padrão
+            print(f'O resultado: {calculadora(numero1, numero2, operacao)}') 
             print()
             cont: str = input('Deseja continuar? (s/n): ').lower()
             if cont == 'n':
