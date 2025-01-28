@@ -25,37 +25,40 @@ def calculadora(num1: float, num2: float, operador: str) -> float:
 
 aux = {"Nome": "João", "Idade": 25, "Profissão": "Programador"}
 
-def calculadora_v2(num1: float, num2: float, operador: str) -> float:
+def calculadora_v2(num1, num2, operador):
     operacoes = {
         "+": lambda: num1 + num2,
         "-": lambda: num1 - num2,
-        "/": lambda: num1 / num2,
         "*": lambda: num1 * num2,
-        "%": lambda: num1 % num2,
+        "/": lambda: float('nan') if num2 == 0 else num1 / num2,
+        "%": lambda: float('nan') if num2 == 0 else num1 % num2,
         "^": lambda: num1 ** num2,
     }
-    funcao = operacoes.get(operador)
-    if funcao:
-        return funcao()
 
-    return float("nan")
-
+    # A chave `operador` pode não existir no dicionário, então garantimos um default.
+    funcao = operacoes.get(operador, lambda: float('nan'))
+    return funcao()  # Avaliamos o lambda aqui, após a verificação.
 
 
-def calculadora_v3(num1: float, num2: float, operador: str) -> float:
+
+
+
+def calculadora_v3(num1, num2, operador):
     operadores = {
-        "+": operator.add,
-        "-": operator.sub,
-        "/": operator.truediv,
-        "*": operator.mul,
-        "%": operator.mod,
-        "^": operator.pow,
+        "+": lambda x, y: x + y,
+        "-": lambda x, y: x - y,
+        "*": lambda x, y: x * y,
+        "/": lambda x, y: float('nan') if y == 0 else x / y,
+        "%": lambda x, y: float('nan') if y == 0 else x % y,
+        "^": lambda x, y: x ** y,
     }
 
+    # Verifica se o operador é válido.
     if operador in operadores:
         return operadores[operador](num1, num2)
+    else:
+        return float('nan')
 
-    return float("nan")
 
 
 # esta versão quando tentamos o expoente de 0, ele retornava um erro, foi retificado
